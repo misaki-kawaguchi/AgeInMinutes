@@ -1,9 +1,11 @@
 package com.misakikawaguchi.ageinminutes
 
+import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.Toast
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -36,5 +38,18 @@ class MainActivity : AppCompatActivity() {
         // 「日」に関する値を取得
         val day = myCalendar.get(Calendar.DAY_OF_MONTH)
 
+        // DatePickerDialogと呼ばれる画面を起動して日付を選択することができる
+        val dpd = DatePickerDialog(this,
+            // ユーザーが日付の選択を終了したことを示すために使用されるリスナー
+            DatePickerDialog.OnDateSetListener() {
+            // DatePickerDialog自体, 選択された年、選択さた月-1の値、選択された日
+            view, selectedYear, selectedMonth, selectedDayOdMonth ->
+
+            // 日付を選択した際の処理を記述、トーストを表示
+            Toast.makeText(this, "The chosen year is $selectedYear, the month is ${selectedMonth+1} and the day is $selectedDayOdMonth", Toast.LENGTH_LONG).show()
+        }
+        ,year
+        ,month
+        ,day)
     }
 }
