@@ -88,5 +88,12 @@ class MainActivity : AppCompatActivity() {
         ,year
         ,month
         ,day)
+
+        // サポートされる最大日時を設定する
+        // 86400000は24時間をmsに変換したもの。これはユーザーが今日と将来の日を選択するように制限するために使用される
+        // 計算結果がマイナスにならないようにする（次の日以降はクリックできない）
+        dpd.datePicker.setMaxDate(Date().time - 86400000)
+        // datePickerダイアログを表示するために使用される
+        dpd.show()
     }
 }
