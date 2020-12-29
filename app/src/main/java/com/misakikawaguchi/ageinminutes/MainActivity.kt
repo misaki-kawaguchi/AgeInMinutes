@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import java.util.*
 
@@ -47,6 +48,17 @@ class MainActivity : AppCompatActivity() {
 
             // 日付を選択した際の処理を記述、トーストを表示
             Toast.makeText(this, "The chosen year is $selectedYear, the month is ${selectedMonth+1} and the day is $selectedDayOdMonth", Toast.LENGTH_LONG).show()
+
+            // 選択された日付は日/月/年の形式に設定される
+            // Javaでカウントされる月は0から11であるため、選択した通りにできるように+1を追加する必要がある
+            val selectedDate = "$selectedDayOdMonth/${selectedMonth+1}/$selectedYear"
+
+            // tvSelectedDateのidを取得
+            val tvSelectedDate:TextView = findViewById(R.id.tvSelectedDate)
+            // フォーマッタは選択された日付をDateオブジェクトに解析するので、日付をms単位簡単に取得できる
+            // tvSelectedDateに取得した日付を表示する
+            tvSelectedDate.setText(selectedDate)
+
         }
         ,year
         ,month
