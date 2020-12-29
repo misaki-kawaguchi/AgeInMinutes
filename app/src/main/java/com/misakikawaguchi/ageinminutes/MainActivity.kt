@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import java.text.SimpleDateFormat
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -55,9 +56,33 @@ class MainActivity : AppCompatActivity() {
 
             // tvSelectedDateのidを取得
             val tvSelectedDate:TextView = findViewById(R.id.tvSelectedDate)
-            // フォーマッタは選択された日付をDateオブジェクトに解析するので、日付をms単位簡単に取得できる
             // tvSelectedDateに取得した日付を表示する
             tvSelectedDate.setText(selectedDate)
+
+            // Date Formatterのインスタンスを取得
+            // 選択された日付を、パラメーターおよびロケールとして渡す形式でフォーマットするため
+            val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
+            // フォーマッタは選択された日付をDateオブジェクトに解析するため、日付をms単位で取得できる
+            val theDate = sdf.parse(selectedDate)
+
+            // 経過時間の単位はms
+            // 選択した日時の分を取得する ms→分に変換、60000で割る
+            // msは1000で割ることで秒に変換できる、秒は60で割ることで分に変換できる
+            val selectedDateInMinutes = theDate!!.time / 60000
+
+            // 上記で使用したDateFormatterを使用して現在の日付を解析する
+            // System.currentTimeMillesメソッド → ms単位で処理時間を計測する（戻り値はlong型）
+            val currentDate = sdf.parse(sdf.format(System.currentTimeMillis()))
+            // 現在の日時の分を取得する ms→分に変換、60000に割る
+            val currentDateToMinutes = currentDate!!.time / 60000
+
+            // 現在の日時から選択した日時を引く（分）
+            val differenceInMinutes = currentDateToMinutes - selectedDateInMinutes
+
+            // tvSelectedDteInMinutesのidを取得
+            val tvSelectedDateInMinutes: TextView = findViewById(R.id.tvSelectedDateInMinutes)
+            // LongからStringに変換 引いた分を表示する
+            tvSelectedDateInMinutes.setText(differenceInMinutes.toString())
 
         }
         ,year
