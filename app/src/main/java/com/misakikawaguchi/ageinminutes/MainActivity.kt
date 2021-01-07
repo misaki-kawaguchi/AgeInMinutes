@@ -53,8 +53,6 @@ class MainActivity : AppCompatActivity() {
             // Javaでカウントされる月は0から11であるため、選択した通りにできるように+1を追加する必要がある
             val selectedDate = "$selectedDayOdMonth/${selectedMonth+1}/$selectedYear"
 
-            // tvSelectedDateのidを取得
-            val tvSelectedDate:TextView = findViewById(R.id.tvSelectedDate)
             // tvSelectedDateに取得した日付を表示する
             tvSelectedDate.setText(selectedDate)
 
