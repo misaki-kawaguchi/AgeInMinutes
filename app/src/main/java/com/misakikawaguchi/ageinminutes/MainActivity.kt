@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -16,8 +17,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Select Dateボタン(btnDatePicker)のidを取得
-        val btnDatePicker:Button = findViewById(R.id.btnDatePicker)
         //Select Dateボタンを押す
         btnDatePicker.setOnClickListener {view ->
             clickDatePicker(view)
